@@ -1,110 +1,358 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pinoy ESL Careers</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🇵🇭 Pinoy ESL Careers – We’re Hiring Filipino Teachers</title>
+  <meta name="description" content="Proudly hiring Filipino ESL teachers. Work from home, flexible hours, competitive pay." />
+  <style>
+    /* ------------------------------
+       Base + Theme
+    ------------------------------ */
+    :root{
+      --brand:#00296b;      /* deep blue */
+      --brand-2:#0096c7;    /* cyan */
+      --accent:#ffd500;     /* yellow */
+      --text:#0b132b;
+      --muted:#6b7280;
+      --bg:#f7f8fa;
+      --card:#ffffff;
+      --ring: 0 8px 24px rgba(0,0,0,.08);
+      --ring-strong: 0 12px 36px rgba(0,0,0,.14);
+      --radius: 18px;
+    }*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  color:var(--text); background:var(--bg); line-height:1.5;
+}
+img{max-width:100%; display:block}
+a{color:inherit}
+
+/* ------------------------------
+   Header (animated underline nav + mobile drawer)
+------------------------------ */
+header{
+  position:sticky; top:0; z-index:50;
+  background:linear-gradient( to right, rgba(0,41,107,.95), rgba(0,150,199,.95) );
+  color:#fff; backdrop-filter:saturate(140%) blur(6px);
+  box-shadow:var(--ring);
+}
+.nav-wrap{max-width:1100px; margin:auto; padding:12px 18px; display:flex; align-items:center; justify-content:space-between}
+.logo{display:flex; gap:10px; align-items:center; font-weight:800; letter-spacing:.2px}
+.logo .flag{filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
+
+/* desktop nav */
+nav{display:flex; gap:18px; align-items:center}
+nav a{position:relative; text-decoration:none; color:#fff; font-weight:600; opacity:.95}
+nav a::after{content:""; position:absolute; left:0; right:100%; bottom:-6px; height:2px; background:var(--accent); transition:right .35s cubic-bezier(.22,.61,.36,1)}
+nav a:hover::after, nav a:focus-visible::after{right:0}
+
+.menu-btn{display:none; border:0; background:#ffffff1a; color:#fff; padding:8px 12px; border-radius:10px; font-size:18px}
+
+/* mobile drawer */
+.drawer{display:none}
+.drawer.open{display:block; animation:slideDown .22s ease-out}
+.drawer a{display:block; padding:12px 18px; border-top:1px solid #ffffff2a; text-decoration:none; color:#fff}
+
+@keyframes slideDown{from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:translateY(0)}}
+
+/* ------------------------------
+   Hero (animated gradient + floating shapes + shimmer CTA)
+------------------------------ */
+.hero{
+  position:relative; isolation:isolate;
+  min-height:64svh; display:grid; place-items:center; text-align:center; color:#fff;
+  background: linear-gradient(120deg, var(--brand), var(--brand-2));
+  overflow:hidden;
+}
+/* animated gradient */
+.hero::before{
+  content:""; position:absolute; inset:-20%; z-index:-1;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(255,213,0,.16), transparent 40%, rgba(0,150,199,.18) 60%, transparent 80%);
+  animation:spin 18s linear infinite;
+  filter: blur(60px);
+}
+@keyframes spin{to{transform:rotate(1turn)}}
+
+/* floating shapes */
+.blob{position:absolute; width:220px; aspect-ratio:1; background:radial-gradient(circle at 30% 30%, #fff3, #fff0 60%); border-radius:40% 60% 60% 40%/60% 40% 60% 40%; filter:blur(10px)}
+.b1{top:10%; left:6%; animation:float 12s ease-in-out infinite}
+.b2{bottom:8%; right:10%; animation:float 15s ease-in-out -4s infinite}
+@keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+
+.hero-inner{max-width:980px; padding:56px 18px}
+.hero h1{font-size: clamp(28px, 4.2vw, 44px); line-height:1.1; margin:0 0 10px}
+.hero p{font-size:clamp(14px, 2.2vw, 18px); opacity:.95}
+
+.cta{display:inline-grid; place-items:center; gap:6px; margin-top:18px}
+.btn{--elev: var(--ring); display:inline-block; padding:14px 20px; border-radius:14px; border:0; cursor:pointer; font-weight:800; letter-spacing:.3px; background:linear-gradient( to right, var(--accent), #ffe55c); color:#111; box-shadow:var(--elev); position:relative; overflow:hidden}
+.btn .shimmer{position:absolute; inset:0; background:linear-gradient(110deg, #fff0 45%, #fff6 50%, #fff0 55%); transform:translateX(-120%);}
+.btn:hover .shimmer{animation:shimmer 1.2s ease}
+@keyframes shimmer{to{transform:translateX(120%)}}
+
+/* ripple (added by JS) */
+.ripple{position:absolute; border-radius:50%; transform:translate(-50%, -50%); pointer-events:none; background:#fff7; animation:ripple .6s ease-out}
+@keyframes ripple{from{width:0;height:0;opacity:.7} to{width:260px; height:260px; opacity:0}}
+
+/* ------------------------------
+   Sections + Cards (scroll reveal)
+------------------------------ */
+.container{max-width:1100px; margin:auto; padding:32px 18px}
+section h2{font-size:clamp(22px, 3.4vw, 30px); color:var(--brand); margin:0 0 10px}
+.muted{color:var(--muted)}
+
+.grid{display:grid; gap:16px}
+.grid.auto{grid-template-columns: repeat(auto-fit, minmax(240px,1fr))}
+
+.card{background:var(--card); border-radius:var(--radius); padding:18px; box-shadow:var(--ring); transition:transform .25s ease, box-shadow .25s ease}
+.card:hover{transform:translateY(-4px); box-shadow:var(--ring-strong)}
+
+/* reveal animation */
+.reveal{opacity:0; transform:translateY(16px); transition: opacity .6s ease, transform .6s ease}
+.reveal.in{opacity:1; transform:translateY(0)}
+
+/* benefits list */
+.benefits li{display:flex; gap:10px; align-items:flex-start; padding:10px 0}
+
+/* table */
+table{width:100%; border-collapse:collapse; background:var(--card); border-radius:var(--radius); overflow:hidden; box-shadow:var(--ring)}
+th,td{padding:14px 12px; text-align:left; border-bottom:1px solid #eaecef}
+th{background:#f7fbff; color:var(--brand)}
+
+/* testimonials slider (pure CSS)
+   Radio hack – no JS dependency */
+.slider{position:relative; overflow:hidden; border-radius:var(--radius); box-shadow:var(--ring)}
+.slides{display:flex; width:300%; transition:transform .6s ease}
+.slide{flex:1 0 100%; padding:22px; background:#f6f7f9}
+.slider input{display:none}
+#t2:checked ~ .slides{transform:translateX(-100%)}
+#t3:checked ~ .slides{transform:translateX(-200%)}
+.dots{display:flex; gap:10px; justify-content:center; padding:10px}
+.dot{width:10px; height:10px; border-radius:999px; background:#ced4da}
+#t1:checked ~ .dots label[for=t1],
+#t2:checked ~ .dots label[for=t2],
+#t3:checked ~ .dots label[for=t3]{background:var(--brand-2)}
+
+/* form */
+form{display:grid; gap:12px}
+input, select, textarea{
+  width:100%; padding:12px 14px; border:1px solid #d1d5db; border-radius:12px; background:#fff; transition:border-color .2s ease, box-shadow .2s ease;
+}
+input:focus, select:focus, textarea:focus{outline:none; border-color:var(--brand-2); box-shadow:0 0 0 4px rgba(0,150,199,.15)}
+textarea{min-height:120px; resize:vertical}
+.actions{display:flex; gap:10px; flex-wrap:wrap}
+
+/* toast */
+.toast{position:fixed; right:16px; bottom:16px; background:#0ea5e9; color:#fff; padding:12px 14px; border-radius:12px; box-shadow:var(--ring-strong); transform:translateY(20px); opacity:0; pointer-events:none}
+.toast.show{animation:toastIn .2s ease forwards}
+@keyframes toastIn{to{transform:translateY(0); opacity:1}}
+
+/* footer */
+footer{padding:26px 18px; text-align:center; color:#ffffffd9; background:linear-gradient(to right, var(--brand), var(--brand-2))}
+
+/* accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .hero::before, .b1, .b2, .btn .shimmer{animation:none !important}
+  .reveal{transition:none}
+}
+
+/* responsive tweaks */
+@media (max-width:860px){
+  .menu-btn{display:inline-flex; align-items:center; gap:8px}
+  nav{display:none}
+}
+
+  </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header>
-        <div class="logo">🇵🇭 Pinoy ESL Careers</div>
-        <nav id="navLinks">
-            <a href="#about">About</a>
-            <a href="#benefits">Benefits</a>
-            <a href="#process">Hiring Process</a>
-            <a href="#faq">FAQ</a>
-            <a href="#apply">Apply</a>
-        </nav>
-        <div class="menu-toggle" id="menuToggle">☰</div>
-    </header>
+  <!-- Header -->
+  <header>
+    <div class="nav-wrap">
+      <div class="logo"><span class="flag">🇵🇭</span> <span>Pinoy ESL Careers</span></div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#process">Process</a>
+        <a href="#faq">FAQ</a>
+        <a href="#apply">Apply</a>
+      </nav>
+      <button class="menu-btn" id="menuBtn">☰ Menu</button>
+    </div>
+    <div class="drawer" id="drawer">
+      <a href="#about">About</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#process">Process</a>
+      <a href="#faq">FAQ</a>
+      <a href="#apply">Apply</a>
+    </div>
+  </header>  <!-- Hero -->  <section class="hero">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="hero-inner">
+      <h1>Proudly Hiring Filipino ESL Teachers</h1>
+      <p>Teach learners worldwide from the comfort of your home. Earn ₱25,000–₱45,000 monthly with flexible hours and free training.</p>
+      <div class="cta">
+        <button class="btn" id="scrollApply">
+          <span>Apply Now</span>
+          <span class="shimmer"></span>
+        </button>
+        <small class="muted">No experience? No problem. We train you.</small>
+      </div>
+    </div>
+  </section>  <!-- About -->  <section id="about" class="container reveal">
+    <h2>About Us</h2>
+    <p class="muted">We connect talented Filipino educators with international students across Asia, Europe, and South America—showcasing the warmth, clarity, and professionalism of Pinoy teachers.</p>
+  </section>  <!-- Benefits (cards) -->  <section id="benefits" class="container reveal">
+    <h2>Why Join Us?</h2>
+    <div class="grid auto">
+      <article class="card">
+        <h3>💻 Work From Home</h3>
+        <p class="muted">100% remote with reliable scheduling tools.</p>
+      </article>
+      <article class="card">
+        <h3>💰 Competitive Pay</h3>
+        <p class="muted">₱25k–₱45k/month + incentives.</p>
+      </article>
+      <article class="card">
+        <h3>📚 Free Training</h3>
+        <p class="muted">Demo coaching and lesson materials provided.</p>
+      </article>
+      <article class="card">
+        <h3>🌏 Global Students</h3>
+        <p class="muted">Teach learners from beginner to advanced levels.</p>
+      </article>
+    </div>
+  </section>  <!-- Salary & Benefits Table -->  <section class="container reveal">
+    <h2>Salary & Perks</h2>
+    <table aria-label="Salary and benefits table">
+      <thead>
+        <tr><th>Item</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Base Rate</td><td>₱180–₱300 per 25‑min lesson (experience-based)</td></tr>
+        <tr><td>Bonuses</td><td>Attendance, performance, and referral incentives</td></tr>
+        <tr><td>Schedule</td><td>Flexible; peak hours evenings and weekends</td></tr>
+        <tr><td>Equipment</td><td>PC/laptop, headset with mic, stable internet</td></tr>
+      </tbody>
+    </table>
+  </section>  <!-- Process -->  <section id="process" class="container reveal">
+    <h2>Hiring Process</h2>
+    <div class="grid auto">
+      <div class="card"><strong>1. Submit Application</strong><p class="muted">Upload your details and CV link.</p></div>
+      <div class="card"><strong>2. Screening</strong><p class="muted">Profile + tech check review.</p></div>
+      <div class="card"><strong>3. Demo Lesson</strong><p class="muted">15–20 min with our evaluator.</p></div>
+      <div class="card"><strong>4. Final Interview</strong><p class="muted">Discuss availability and rates.</p></div>
+      <div class="card"><strong>5. Onboarding</strong><p class="muted">Training + start teaching!</p></div>
+    </div>
+  </section>  <!-- Testimonials Slider (CSS only) -->  <section class="container reveal">
+    <h2>What Our Teachers Say</h2>
+    <div class="slider">
+      <input type="radio" name="t" id="t1" checked>
+      <input type="radio" name="t" id="t2">
+      <input type="radio" name="t" id="t3">
+      <div class="slides">
+        <div class="slide"><em>“Naka‑earn ko ug stable income while naa sa balay. Supportive kaayo ang team!”</em><br><strong>— Maria, Cebu</strong></div>
+        <div class="slide"><em>“Flexible oras, dali i‑balance sa school ug family.”</em><br><strong>— John, Davao</strong></div>
+        <div class="slide"><em>“Libre ang training ug materials. Nindot para sa beginners.”</em><br><strong>— Aira, Cagayan de Oro</strong></div>
+      </div>
+      <div class="dots">
+        <label class="dot" for="t1" aria-label="slide 1"></label>
+        <label class="dot" for="t2" aria-label="slide 2"></label>
+        <label class="dot" for="t3" aria-label="slide 3"></label>
+      </div>
+    </div>
+  </section>  <!-- FAQ -->  <section id="faq" class="container reveal">
+    <h2>FAQ</h2>
+    <div class="grid">
+      <details class="card"><summary><strong>Need experience?</strong></summary><p class="muted">Optional. Nice-to-have. We provide free training & demo coaching.</p></details>
+      <details class="card"><summary><strong>Technical requirements?</strong></summary><p class="muted">Laptop/PC, quiet space, webcam, headset, 10 Mbps+ internet.</p></details>
+      <details class="card"><summary><strong>How fast is the process?</strong></summary><p class="muted">Usually 3–7 days depending on your availability.</p></details>
+    </div>
+  </section>  <!-- Apply -->  <section id="apply" class="container reveal">
+    <h2>Apply Now</h2>
+    <form id="applicationForm" class="card" autocomplete="on">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email Address" required>
+      <input type="tel" id="phone" placeholder="Phone Number" required>
+      <select id="role" required>
+        <option value="">Select Position</option>
+        <option>Online ESL Teacher</option>
+        <option>QA Reviewer</option>
+        <option>Curriculum Developer</option>
+      </select>
+      <input type="url" id="cv" placeholder="CV or Drive link" required>
+      <textarea id="note" placeholder="Short cover letter (why should we hire you?)" required></textarea>
+      <div class="actions">
+        <button class="btn" type="submit"><span>Submit Application</span><span class="shimmer"></span></button>
+        <button class="btn" type="button" id="viewApps"><span>View My Submissions</span><span class="shimmer"></span></button>
+      </div>
+      <small class="muted">By submitting, you agree this is a demo site.</small>
+    </form>
+  </section>  <footer>
+    © 2025 Pinoy ESL Careers 
+  </footer>  <!-- Toast -->  <div class="toast" id="toast" role="status" aria-live="polite">Application submitted!</div>  <script>
+    // Mobile drawer
+    const menuBtn = document.getElementById('menuBtn');
+    const drawer = document.getElementById('drawer');
+    menuBtn.addEventListener('click', ()=> drawer.classList.toggle('open'));
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-text">
-            <h1>Proudly Hiring Filipino ESL Teachers</h1>
-            <p>Teach English to students around the globe. Work from home and earn from ₱25,000 to ₱45,000 monthly!</p>
-            <a href="#apply" class="btn">Apply Now</a>
-        </div>
-    </section>
+    // Smooth scroll to Apply + ripple effect on CTA
+    const scrollBtn = document.getElementById('scrollApply');
+    scrollBtn.addEventListener('click', (e)=>{
+      // ripple
+      const r = document.createElement('span');
+      r.className = 'ripple';
+      r.style.left = (e.offsetX|| (e.clientX - e.target.getBoundingClientRect().left)) + 'px';
+      r.style.top  = (e.offsetY|| (e.clientY - e.target.getBoundingClientRect().top))  + 'px';
+      e.currentTarget.appendChild(r);
+      setTimeout(()=> r.remove(), 600);
+      // scroll
+      document.querySelector('#apply').scrollIntoView({behavior:'smooth'});
+    });
 
-    <!-- ABOUT -->
-    <section id="about">
-        <h2>About Us</h2>
-        <p>Pinoy ESL Careers is dedicated to connecting talented Filipino teachers with international students. Our mission is to showcase the warmth, professionalism, and excellence of Filipino educators to the world.</p>
-    </section>
+    // Scroll reveal using IntersectionObserver
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, {threshold: .12});
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
 
-    <!-- BENEFITS -->
-    <section id="benefits">
-        <h2>Why Join Us?</h2>
-        <ul>
-            <li>💻 Work from home</li>
-            <li>💰 Competitive salary: ₱25,000 - ₱45,000/month</li>
-            <li>📅 Flexible teaching schedule</li>
-            <li>📚 Free training & teaching materials</li>
-            <li>🌏 Teach students from Asia, Europe, and South America</li>
-        </ul>
-    </section>
+    // Fake backend: store to localStorage
+    const form = document.getElementById('applicationForm');
+    const toast = document.getElementById('toast');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const data = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        role: document.getElementById('role').value,
+        cv: document.getElementById('cv').value.trim(),
+        note: document.getElementById('note').value.trim(),
+        date: new Date().toLocaleString()
+      };
+      const key = 'pinoy-esl-apps';
+      const list = JSON.parse(localStorage.getItem(key) || '[]');
+      list.push(data);
+      localStorage.setItem(key, JSON.stringify(list));
 
-    <!-- HIRING PROCESS -->
-    <section id="process">
-        <h2>Our Hiring Process</h2>
-        <ol>
-            <li>Submit your application online</li>
-            <li>Initial screening of qualifications</li>
-            <li>Demo teaching session</li>
-            <li>Final interview</li>
-            <li>Onboarding and training</li>
-        </ol>
-    </section>
+      // mini loading state
+      const btn = form.querySelector('button[type="submit"]');
+      const prev = btn.innerHTML; btn.disabled = true; btn.innerHTML = 'Submitting…';
+      setTimeout(()=>{ // simulate network
+        btn.disabled = false; btn.innerHTML = prev; form.reset();
+        toast.textContent = '✅ Submitted! We\'ll contact you shortly (demo).';
+        toast.classList.add('show');
+        setTimeout(()=> toast.classList.remove('show'), 2600);
+      }, 700);
+    });
 
-    <!-- TESTIMONIALS -->
-    <section id="testimonials">
-        <h2>What Our Teachers Say</h2>
-        <div class="testimonial">
-            <p>"Pinoy ESL Careers gave me the chance to earn well while staying at home with my family. The students are amazing!"</p>
-            <strong>- Maria Santos, Cebu</strong>
-        </div>
-        <div class="testimonial">
-            <p>"I love the flexible schedule and supportive community. I can work and still have time for my hobbies!"</p>
-            <strong>- John Reyes, Davao</strong>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq">
-        <h2>Frequently Asked Questions</h2>
-        <p><strong>Do I need teaching experience?</strong> No, but it’s an advantage! We provide free training.</p>
-        <p><strong>What are the technical requirements?</strong> A stable internet connection, a good headset, and a quiet workspace.</p>
-    </section>
-
-    <!-- APPLY -->
-    <section id="apply">
-        <h2>Apply Now</h2>
-        <form id="applicationForm">
-            <input type="text" placeholder="Full Name" required>
-            <input type="email" placeholder="Email Address" required>
-            <input type="text" placeholder="Phone Number" required>
-            <input type="file" required>
-            <textarea placeholder="Why do you want to teach ESL?" required></textarea>
-            <button type="submit">Submit Application</button>
-        </form>
-        <p id="successMessage" style="display:none; color:green; text-align:center;">✅ Your application has been submitted!</p>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <p>Email: hr@pinoyeslcareers.com</p>
-        <p>Facebook: facebook.com/PinoyESLCareers</p>
-        <p>Phone: +63 908 818 4444</p>
-    </section>
-
-    <footer>
-        <p>© 2025 Pinoy ESL Careers </p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
+    // View submissions (simple alert)
+    document.getElementById('viewApps').addEventListener('click', ()=>{
+      const list = JSON.parse(localStorage.getItem('pinoy-esl-apps') || '[]');
+      if(!list.length){ alert('No submissions yet on this device.'); return; }
+      alert(list.map((a,i)=> `${i+1}. ${a.name} — ${a.role} — ${a.date}`).join('\n'));
+    });
+  </script></body>
 </html>
