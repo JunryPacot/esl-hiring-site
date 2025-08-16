@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+header {
+    background: #00296b;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    color: #ffd500;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.hero {
+    background: linear-gradient(to right, rgba(0,41,107,0.85), rgba(0,150,199,0.85)), 
+                url('images/filipino-teacher.jpg') center/cover no-repeat;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero-text {
+    max-width: 700px;
+    margin: auto;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #ffd500;
+    color: black;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+section {
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+section h2 {
+    margin-bottom: 15px;
+    color: #00296b;
+}
+
+ul, ol {
+    margin-left: 20px;
+}
+
+.testimonial {
+    background: #f0f0f0;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input, form textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+form button {
+    background: #00296b;
+    color: white;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: #001233;
+}
+
+footer {
+    text-align: center;
+    background: #00296b;
+    color: white;
+    padding: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    nav {
+        display: none;
+        flex-direction: column;
+        background: #00296b;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+    }
+
+    nav a {
+        padding: 10px;
+        border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
