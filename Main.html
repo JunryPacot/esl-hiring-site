@@ -172,6 +172,7 @@ footer{padding:26px 18px; text-align:center; color:#ffffffd9; background:linear-
       <nav>
         <a href="#about">About</a>
         <a href="#benefits">Benefits</a>
+         <a href="#requirements">Requirements </a>
         <a href="#process">Process</a>
         <a href="#faq">FAQ</a>
         <a href="#apply">Apply</a>
@@ -181,6 +182,7 @@ footer{padding:26px 18px; text-align:center; color:#ffffffd9; background:linear-
     <div class="drawer" id="drawer">
       <a href="#about">About</a>
       <a href="#benefits">Benefits</a>
+       <a href="#requirements">Requirements </a>
       <a href="#process">Process</a>
       <a href="#faq">FAQ</a>
       <a href="#apply">Apply</a>
@@ -235,6 +237,35 @@ footer{padding:26px 18px; text-align:center; color:#ffffffd9; background:linear-
         <tr><td>Equipment</td><td>PC/laptop, headset with mic, stable internet</td></tr>
       </tbody>
     </table>
+    <section id="requirements" class="container reveal">
+    <h2>Requirements</h2>
+    <div class="grid auto">
+      <div class="card"><strong>Educational & Professional Requirements</strong><p class="muted">Bachelor’s degree (often in Education, English, or related field). 
+      
+      TEFL/TESOL/CELTA certification (for teaching English as a foreign/second language).
+      
+      Strong English proficiency (speaking, reading, writing, grammar).</p></div>
+      <div class="card"><strong>Technical / Digital Skills</strong><p class="muted">Knowledge of online teaching platforms (Zoom, Google Meet, MS Teams).
+
+Ability to use digital tools (interactive whiteboards, PowerPoint, Google Classroom, Kahoot, Quizlet).
+
+Basic troubleshooting (internet, audio, and video setup).</p></div>
+      <div class="card"><strong>Equipment Requirements (if teaching online)</strong><p class="muted">Stable high-speed internet.
+
+Computer/laptop with updated software.
+
+Good quality headset and microphone.
+
+Webcam with clear resolution.</p></div>
+      <div class="card"><strong>Teaching & Classroom Skills</strong><p class="muted">Lesson planning and curriculum design.
+
+Classroom management.
+
+Assessment and evaluation.
+
+Ability to adapt to different learning styles.</p></div>
+    </div>
+  </section> 
   </section>  <!-- Process -->  <section id="process" class="container reveal">
     <h2>Hiring Process</h2>
     <div class="grid auto">
@@ -297,7 +328,7 @@ footer{padding:26px 18px; text-align:center; color:#ffffffd9; background:linear-
     const drawer = document.getElementById('drawer');
     menuBtn.addEventListener('click', ()=> drawer.classList.toggle('open'));
 
-    // Smooth scroll to Apply + ripple effect on CTA
+    // Smooth scroll to Apply + ripple effect on CTA.
     const scrollBtn = document.getElementById('scrollApply');
     scrollBtn.addEventListener('click', (e)=>{
       // ripple
@@ -356,4 +387,4 @@ footer{padding:26px 18px; text-align:center; color:#ffffffd9; background:linear-
       alert(list.map((a,i)=> `${i+1}. ${a.name} — ${a.role} — ${a.date}`).join('\n'));
     });
   </script></body>
-</html>
+                                </html>
