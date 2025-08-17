@@ -51,6 +51,14 @@
       border: 1px solid var(--primary);
       outline: none;
     }
+    .message {
+      margin-top: 0.3rem;
+      font-size: 0.9rem;
+      min-height: 1.2rem;
+      text-align: center;
+    }
+    .error { color: #d90429; }
+    .success { color: #2a9d8f; }
     .login-box button {
       width: 100%;
       padding: 0.9rem;
@@ -118,7 +126,6 @@
       cursor: pointer;
     }
 
-    /* Animations */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(15px); }
       to { opacity: 1; transform: translateY(0); }
@@ -128,17 +135,10 @@
       to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     }
 
-    /* 📱 Mobile tweaks */
     @media (max-width: 480px) {
       .login-box { padding: 1.2rem; }
       .login-box h2 { font-size: 1.2rem; }
       .login-box input, .login-box button { font-size: 0.95rem; padding: 0.7rem; }
-    }
-
-    /* 💻 Larger screen adjustments */
-    @media (min-width: 768px) {
-      .login-box { padding: 2.5rem; }
-      .login-box h2 { font-size: 1.6rem; }
     }
   </style>
 </head>
@@ -148,6 +148,10 @@
   <h2>Login to ESL Careers</h2>
   <input type="text" id="username" placeholder="Username">
   <input type="password" id="password" placeholder="Password">
+
+  <!-- inline message here -->
+  <div id="message" class="message"></div>
+
   <button onclick="login()">Login</button>
   <button onclick="signup()">Create Account</button>
 
@@ -159,36 +163,57 @@
 
 <!-- Fake Popup -->
 <div id="popup">
-  <h3>Welcome to ESL Careers 🎉</h3>
+  <h3>Welcome to ESL Careers </h3>
   <p id="popup-msg"></p>
   <button onclick="closePopup()">OK</button>
 </div>
 
 <script>
+  const msgBox = document.getElementById("message");
+
+  function clearMessage() {
+    msgBox.innerText = "";
+    msgBox.className = "message";
+  }
+
   function signup() {
+    clearMessage();
     let user = document.getElementById("username").value;
     let pass = document.getElementById("password").value;
     if(user && pass){
       localStorage.setItem("eslUser", JSON.stringify({user, pass}));
-      alert("✅ Account created! You can now log in.");
+      msgBox.innerText = "✅ Account created! You can now log in.";
+      msgBox.classList.add("success");
     } else {
-      alert("⚠️ Please enter username and password.");
+      msgBox.innerText = "⚠️ Please enter username and password.";
+      msgBox.classList.add("error");
     }
   }
 
   function login() {
+    clearMessage();
     let user = document.getElementById("username").value;
     let pass = document.getElementById("password").value;
     let stored = JSON.parse(localStorage.getItem("eslUser"));
     if(stored && stored.user === user && stored.pass === pass){
-      showPopup("Welcome back, " + user + "!");
+      msgBox.innerText = "✅ Login successful! Redirecting...";
+      msgBox.classList.add("success");
+      setTimeout(() => {
+        showPopup("Welcome back, " + user + "!");
+      }, 1000);
     } else {
-      alert("❌ Invalid credentials. Please create account first.");
+      msgBox.innerText = "❌ Invalid credentials. Please create account first.";
+      msgBox.classList.add("error");
     }
   }
 
   function googleLogin() {
-    showPopup("Signed in with Google successfully!");
+    clearMessage();
+    msgBox.innerText = "✅ Signed in with Google successfully!";
+    msgBox.classList.add("success");
+    setTimeout(() => {
+      showPopup("Signed in with Google successfully!");
+    }, 1000);
   }
 
   function showPopup(msg) {
@@ -203,4 +228,4 @@
 </script>
 
 </body>
-  </html>
+</html>
